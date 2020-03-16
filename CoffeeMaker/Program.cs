@@ -3,12 +3,20 @@
 namespace CoffeeMaker {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("Hello World!");
-            var ot = new OrderTranslator();
-            Console.WriteLine(ot.Translate("T:1:0"));
-            Console.WriteLine(ot.Translate("T:5:"));
-            Console.WriteLine(ot.Translate("C:2:0"));
-            Console.WriteLine(ot.Translate("M:hello"));
+            var drinkMaker = new DrinkMaker();
+            Console.WriteLine("Input an Order: ");
+            var orderCode = Console.ReadLine();
+            try {
+                var order = drinkMaker.MakeDrink(orderCode);
+                Console.WriteLine($"You have selected {order.type.ToString().ToLower()}, with {order.numberOfSugars} sugar/s\nThis will cost {order.cost} euros");
+            }
+            catch (Exception e) {
+                Console.WriteLine(ReturnExceptionMessage(e));
+            }
+        }
+        
+        private static string ReturnExceptionMessage(Exception e) {
+            return $"M:Invalid Order - {e.Message}";
         }
     }
 }
