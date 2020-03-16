@@ -11,12 +11,8 @@ namespace CoffeeMaker {
                 Console.WriteLine($"You have selected {order.type.ToString().ToLower()}, with {order.numberOfSugars} sugar/s\nThis will cost {order.cost} euros");
             }
             catch (Exception e) {
-                Console.WriteLine(ReturnExceptionMessage(e));
+                Console.WriteLine($"M:Invalid Order - {e.Message}");
             }
-        }
-        
-        private static string ReturnExceptionMessage(Exception e) {
-            return $"M:Invalid Order - {e.Message}";
         }
     }
 }
