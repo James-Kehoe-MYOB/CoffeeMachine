@@ -4,56 +4,56 @@ using Xunit;
 
 namespace CoffeeMakerTests {
     public class UnitTest1 {
-        OrderTranslator orderTranslator = new OrderTranslator();
+        private readonly DrinkMaker _drinkMaker = new DrinkMaker();
+        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker();
         [Fact (DisplayName = "Accept User Input")]
         public void AcceptUserInput() {
             
-            var order = "my order";
+            var order = "T:1:0";
             
-            Assert.IsType<string>(orderTranslator.Translate(order));
+            Assert.IsAssignableFrom<Drink>(_drinkMaker.MakeDrink(order));
         }
         
         [Fact (DisplayName = "Validate User Input")]
         public void ValidateUserInput() {
             var order = "T:1:0";
-
-            Assert.NotEqual("Invalid Order", orderTranslator.Translate(order));
-
+            Assert.NotNull(_drinkMaker.MakeDrink(order));
         }
 
         [Fact]
         public void CannotInputInvalidOrder() {
-            string order = "my order";
+            var order = "INVALID ORDER";
             
-            Assert.Equal("Invalid Order", orderTranslator.Translate(order));
+            Assert.Throws<InvalidOrderException>(() => _fakeDrinkMaker.Translate(order));
         }
         
         [Fact (DisplayName = "Process User Input")]
         public void ProcessUserInput() {
             var order = "T:1:0";
-            Assert.Equal("Drink maker makes 1 tea with 1 sugar/s and a stick", orderTranslator.Translate(order));
+            var expectedDrink = new Tea(1);
+            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order));
         }
         
         [Fact (DisplayName = "Valid Input Returns one drink")]
         public void ValidInputReturnsOneDrink() {
-            var order = "C::";
-            orderTranslator.Translate(order);
-            Assert.Equal(1, orderTranslator.NumberOfDrinks);
+            var order = "C:1:";
+            _drinkMaker.MakeDrink(order);
+            Assert.Equal(1, _drinkMaker.numberOfDrinks);
         }
         
         [Fact (DisplayName = "Valid Input with one or more sugars has stick")]
         public void ValidInputWithSugarHasStick() {
             var order = "H:1:0";
-            orderTranslator.Translate(order);
-            Assert.Equal("and a stick", orderTranslator.stick);
+            _drinkMaker.MakeDrink(order);
+            Assert.True(_drinkMaker.stick);
         }
         
-        [Fact (DisplayName = "Drink Maker Returns a Message to the interface")]
-        public void DrinkMakerReturnsMessageToInterface() {
-            var message = "this is a message";
-            var order = $"M:{message}";
-            
-            Assert.Equal("this is a message", orderTranslator.Translate(order));
-        }
+        //[Fact (DisplayName = "Drink Maker Returns a Message to the interface")]
+        // public void DrinkMakerReturnsMessageToInterface() {
+        //     var message = "this is a message";
+        //     var order = $"M:{message}";
+        //     
+        //     Assert.Equal("this is a message", _drinkMaker.MakeDrink(order));
+        // }
     }
 }
