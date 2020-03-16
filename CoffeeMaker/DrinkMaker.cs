@@ -14,13 +14,14 @@ namespace CoffeeMaker {
         public int numberOfDrinks;
         private int sugar;
         public bool stick;
+        private string[] _orderComponents;
 
         public Drink MakeDrink(string order) {
             numberOfDrinks = 1;
-            var orderComponents = SplitOrderComponents(order);
-            AddSugar(orderComponents);
-            AddStick(orderComponents);
-            return CreateDrink(orderComponents);
+            _orderComponents = SplitOrderComponents(order);
+            AddSugar();
+            AddStick();
+            return CreateDrink();
         }
 
         private string[] SplitOrderComponents(string order) {
@@ -32,35 +33,35 @@ namespace CoffeeMaker {
             return orderComponents;
         }
 
-        private void AddSugar(string[] orderComponents) {
-            if (orderComponents[Sugars] == "") {
+        private void AddSugar() {
+            if (_orderComponents[Sugars] == "") {
                 sugar = 0;
             } else {
-                var isInt = int.TryParse(orderComponents[Sugars], out var i);
-                if (!isInt) {
-                    throw new InvalidSugarException(orderComponents[Sugars]);
+                var isInt = int.TryParse(_orderComponents[Sugars], out var i);
+                if (!isInt || i < 0) {
+                    throw new InvalidSugarException(_orderComponents[Sugars]);
                 }
-                sugar = int.Parse(orderComponents[Sugars]);
+                sugar = int.Parse(_orderComponents[Sugars]);
             }
         }
 
-        private void AddStick(string[] orderComponents) {
-            if ((orderComponents[WithStick] == "0" || orderComponents[WithStick] == "") && sugar != 0) {
+        private void AddStick() {
+            if ((_orderComponents[WithStick] == "0" || _orderComponents[WithStick] == "") && sugar != 0) {
                 stick = true;
             } else if (sugar == 0) {
                 stick = false;
             }
             else {
-                throw new InvalidStickException(orderComponents[WithStick]);
+                throw new InvalidStickException(_orderComponents[WithStick]);
             }
         }
 
-        private Drink CreateDrink(string[] orderComponents) {
-            Drink returnDrink = orderComponents[Drink] switch {
-                Tea => new Tea(sugar),
-                Chocolate => new Chocolate(sugar),
-                Coffee => new Coffee(sugar),
-                _ => throw new InvalidDrinkException(orderComponents[Drink])
+        private Drink CreateDrink() {
+            var returnDrink = _orderComponents[Drink] switch {
+                Tea => new Drink(CoffeeMaker.Drink.DrinkType.Tea, sugar, 0.4),
+                Chocolate => new Drink(CoffeeMaker.Drink.DrinkType.Chocolate, sugar, 0.5),
+                Coffee => new Drink(CoffeeMaker.Drink.DrinkType.Coffee, sugar, 0.6),
+                _ => throw new InvalidDrinkException(_orderComponents[Drink])
             };
             return returnDrink;
         }
