@@ -30,7 +30,7 @@ namespace CoffeeMakerTests {
         [Fact (DisplayName = "Process User Input")]
         public void ProcessUserInput() {
             var order = "T:1:0";
-            var expectedDrink = new Tea(1);
+            var expectedDrink = new Drink(Drink.DrinkType.Tea, 1, 0.4);
             Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order));
         }
         

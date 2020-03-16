@@ -1,4 +1,4 @@
-Drink,Cost
-Tea,0.4
-Chocolate,0.5
-Coffee,0.6
+ID,Drink,Cost
+T,Tea,0.4
+H,Chocolate,0.5
+C,Coffee,0.6
