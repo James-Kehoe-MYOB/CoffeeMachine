@@ -58,9 +58,9 @@ namespace CoffeeMaker {
 
         private Drink CreateDrink() {
             var returnDrink = _orderComponents[Drink] switch {
-                Tea => new Drink(CoffeeMaker.Drink.DrinkType.Tea, sugar, 0.4),
-                Chocolate => new Drink(CoffeeMaker.Drink.DrinkType.Chocolate, sugar, 0.5),
-                Coffee => new Drink(CoffeeMaker.Drink.DrinkType.Coffee, sugar, 0.6),
+                Tea => new Drink(DrinkType.Tea, sugar, 0.4),
+                Chocolate => new Drink(DrinkType.Chocolate, sugar, 0.5),
+                Coffee => new Drink(DrinkType.Coffee, sugar, 0.6),
                 _ => throw new InvalidDrinkException(_orderComponents[Drink])
             };
             return returnDrink;

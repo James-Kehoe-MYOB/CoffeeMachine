@@ -17,6 +17,7 @@
         <e p="CoffeeMaker.csproj" t="IncludeRecursive" />
         <e p="Drink.cs" t="Include" />
         <e p="DrinkMaker.cs" t="Include" />
+        <e p="DrinkType.cs" t="Include" />
         <e p="Exceptions.cs" t="Include" />
         <e p="Menu.csv" t="Include" />
         <e p="MenuItem.cs" t="Include" />
