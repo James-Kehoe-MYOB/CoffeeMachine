@@ -18,8 +18,8 @@
         <e p="Drink.cs" t="Include" />
         <e p="DrinkMaker.cs" t="Include" />
         <e p="Exceptions.cs" t="Include" />
-        <e p="Menu.cs" t="Include" />
         <e p="Menu.csv" t="Include" />
+        <e p="MenuItem.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -32,6 +32,7 @@
       <e p="CoffeeMakerSolution.sln" t="IncludeFlat" />
       <e p="CoffeeMakerTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="CafeTests.cs" t="Include" />
         <e p="CoffeeMakerTests.csproj" t="IncludeRecursive" />
         <e p="FakeDrinkMaker.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">

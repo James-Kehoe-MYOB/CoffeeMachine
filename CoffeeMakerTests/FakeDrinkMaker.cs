@@ -2,7 +2,7 @@ using System;
 using CoffeeMaker;
 
 namespace CoffeeMakerTests {
-    public class FakeDrinkMaker : CoffeeMaker.DrinkMaker {
+    public class FakeDrinkMaker : DrinkMaker {
 
         public Drink Translate(string order) {
             numberOfDrinks = 1;
