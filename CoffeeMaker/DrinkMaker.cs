@@ -16,9 +16,9 @@ namespace CoffeeMaker {
         public bool stick;
         private string[] _orderComponents;
 
-        public Drink MakeDrink(string order) {
+        public Drink MakeDrink(string[] orderComponents) {
             numberOfDrinks = 1;
-            _orderComponents = SplitOrderComponents(order);
+            _orderComponents = orderComponents;
             AddSugar();
             AddStick();
             return CreateDrink();

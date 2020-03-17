@@ -5,7 +5,7 @@ namespace CoffeeMakerTests {
     public class CafeTests {
         private Cafe myCafe;
         [Fact]
-        public void OrderingATeaCostsZeroPointFourDollars() {
+        public void TakingAnOrderReturnsCorrectCost() {
             //Arrange
             var order = "T:1:0";
             
@@ -16,5 +16,7 @@ namespace CoffeeMakerTests {
             Assert.Equal(0.4, costOfTea);
         }
         
+        
+
     }
 }

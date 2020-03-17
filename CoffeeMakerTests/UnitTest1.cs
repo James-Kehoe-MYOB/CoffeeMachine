@@ -10,14 +10,16 @@ namespace CoffeeMakerTests {
         public void AcceptUserInput() {
             
             var order = "T:1:0";
+            var orderComponents = order.Split(':');
             
-            Assert.IsAssignableFrom<Drink>(_drinkMaker.MakeDrink(order));
+            Assert.IsAssignableFrom<Drink>(_drinkMaker.MakeDrink(orderComponents));
         }
         
         [Fact (DisplayName = "Validate User Input")]
         public void ValidateUserInput() {
             var order = "T:1:0";
-            Assert.NotNull(_drinkMaker.MakeDrink(order));
+            var orderComponents = order.Split(':');
+            Assert.NotNull(_drinkMaker.MakeDrink(orderComponents));
         }
 
         [Fact]
@@ -30,21 +32,24 @@ namespace CoffeeMakerTests {
         [Fact (DisplayName = "Process User Input")]
         public void ProcessUserInput() {
             var order = "T:1:0";
+            var orderComponents = order.Split(':');
             var expectedDrink = new Drink(Drink.DrinkType.Tea, 1, 0.4);
-            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order));
+            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(orderComponents));
         }
         
         [Fact (DisplayName = "Valid Input Returns one drink")]
         public void ValidInputReturnsOneDrink() {
             var order = "C:1:";
-            _drinkMaker.MakeDrink(order);
+            var orderComponents = order.Split(':');
+            _drinkMaker.MakeDrink(orderComponents);
             Assert.Equal(1, _drinkMaker.numberOfDrinks);
         }
         
         [Fact (DisplayName = "Valid Input with one or more sugars has stick")]
         public void ValidInputWithSugarHasStick() {
             var order = "H:1:0";
-            _drinkMaker.MakeDrink(order);
+            var orderComponents = order.Split(':');
+            _drinkMaker.MakeDrink(orderComponents);
             Assert.True(_drinkMaker.stick);
         }
         

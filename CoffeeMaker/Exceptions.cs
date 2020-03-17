@@ -20,4 +20,9 @@ namespace CoffeeMaker {
         public InvalidStickException(string stick) : base(string.Format($"Invalid stick identifier '{stick}'")){
         }
     }
+    
+    public class InvalidPaymentException : Exception {
+        public InvalidPaymentException(string payment) : base(string.Format($"Cannot accept '{payment}' as payment")){
+        }
+    }
 }

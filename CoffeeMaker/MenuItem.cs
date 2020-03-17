@@ -6,14 +6,14 @@ using CsvHelper;
 namespace CoffeeMaker {
     public class MenuItem {
         //private string _path;
-        public char ID { get; set; }
-        public Drink.DrinkType type { get; set; }
-        public double cost { get; set; }
+        public string ID { get; private set; }
+        public Drink.DrinkType Drink { get; private set; }
+        public double Cost { get; private set; }
 
-        public MenuItem(char ID, Drink.DrinkType type, int cost) {
+        public MenuItem(string ID, Drink.DrinkType Drink, double Cost) {
             this.ID = ID;
-            this.type = type;
-            this.cost = cost;
+            this.Drink = Drink;
+            this.Cost = Cost;
         }
     }
 }
