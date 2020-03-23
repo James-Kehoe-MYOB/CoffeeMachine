@@ -7,7 +7,7 @@ namespace CoffeeMaker {
         }
     }
     class InvalidDrinkException : Exception {
-        public InvalidDrinkException(string drink) : base(string.Format($"{drink} is not a valid drink DrinkType")) {
+        public InvalidDrinkException(string drink) : base(string.Format($"{drink} is not a valid drink type")) {
         }
     }
     

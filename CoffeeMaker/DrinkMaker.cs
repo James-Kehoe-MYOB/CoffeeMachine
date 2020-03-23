@@ -5,12 +5,9 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace CoffeeMaker {
     public class DrinkMaker {
-        private const string Tea = "T";
-        private const string Chocolate = "H";
-        private const string Coffee = "C";
-        private const int Drink = 0;
+        private const int DrinkCode = 0;
         private const int Sugars = 1;
-        private const int WithStick = 2;
+        private const int Stick = 2;
         public int numberOfDrinks;
         private int sugar;
         public bool stick;
@@ -21,49 +18,43 @@ namespace CoffeeMaker {
             _orderComponents = orderComponents;
             AddSugar();
             AddStick();
-            return CreateDrink();
-        }
-
-        private string[] SplitOrderComponents(string order) {
-            var orderComponents = order.Split(':');
-            if (orderComponents.Length != 3) {
-                throw new InvalidOrderException(order);
-            }
-
-            return orderComponents;
+            var returnDrink = MixIngredients();
+            
+            return returnDrink;
         }
 
         private void AddSugar() {
-            if (_orderComponents[Sugars] == "") {
-                sugar = 0;
-            } else {
-                var isInt = int.TryParse(_orderComponents[Sugars], out var i);
-                if (!isInt || i < 0) {
-                    throw new InvalidSugarException(_orderComponents[Sugars]);
-                }
-                sugar = int.Parse(_orderComponents[Sugars]);
-            }
+            sugar = _orderComponents[Sugars] == "" ? 0 : int.Parse(_orderComponents[Sugars]);
         }
 
         private void AddStick() {
-            if ((_orderComponents[WithStick] == "0" || _orderComponents[WithStick] == "") && sugar != 0) {
+            if ((_orderComponents[Stick] == "0" || _orderComponents[Stick] == "") && sugar != 0) {
                 stick = true;
             } else if (sugar == 0) {
                 stick = false;
             }
-            else {
-                throw new InvalidStickException(_orderComponents[WithStick]);
-            }
         }
 
-        private Drink CreateDrink() {
-            var returnDrink = _orderComponents[Drink] switch {
-                Tea => new Drink(DrinkType.Tea, sugar, 0.4),
-                Chocolate => new Drink(DrinkType.Chocolate, sugar, 0.5),
-                Coffee => new Drink(DrinkType.Coffee, sugar, 0.6),
-                _ => throw new InvalidDrinkException(_orderComponents[Drink])
-            };
+        private Drink MixIngredients() {
+            var myType = CoffeeMachine.Menu.Find(m => m.ID == _orderComponents[DrinkCode]).Drink;
+            var returnDrink = new Drink(myType, sugar, false);
             return returnDrink;
+        }
+        
+        public void ParseOrder(string[] orderComponents) {
+
+            if (!CoffeeMachine.Menu.Exists(m => m.ID == orderComponents[DrinkCode])) {
+                throw new InvalidDrinkException(orderComponents[DrinkCode]);
+            }
+            
+            if (orderComponents[Sugars] != "") {
+                if (!int.TryParse(orderComponents[Sugars], out var sugars)) {
+                    throw new InvalidSugarException(orderComponents[Sugars]);
+                }
+            }
+            if (orderComponents[Stick] != "0" && orderComponents[Stick] != "") {
+                throw new InvalidStickException(orderComponents[Stick]);
+            }
         }
     }
 }
