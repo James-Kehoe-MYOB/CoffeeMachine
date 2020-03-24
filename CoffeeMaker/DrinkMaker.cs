@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -12,6 +14,11 @@ namespace CoffeeMaker {
         private int sugar;
         public bool stick;
         private string[] _orderComponents;
+        private List<MenuItem> Menu;
+
+        public DrinkMaker(List<MenuItem> Menu) {
+            this.Menu = Menu;
+        }
 
         public Drink MakeDrink(string[] orderComponents) {
             numberOfDrinks = 1;
@@ -35,15 +42,21 @@ namespace CoffeeMaker {
             }
         }
 
+        private bool CheckIfHot() {
+            var myItem = Menu.Find(m => m.ID == _orderComponents[DrinkCode][0].ToString());
+            return _orderComponents[0].Length == 2 && myItem.CanBeExtraHot;
+        }
+
         private Drink MixIngredients() {
-            var myType = CoffeeMachine.Menu.Find(m => m.ID == _orderComponents[DrinkCode]).Drink;
-            var returnDrink = new Drink(myType, sugar, false);
+            var myItem = Menu.Find(m => m.ID == _orderComponents[DrinkCode][0].ToString());
+            var myType = myItem.Drink;
+            var returnDrink = new Drink(myType, sugar, CheckIfHot());
             return returnDrink;
         }
         
         public void ParseOrder(string[] orderComponents) {
 
-            if (!CoffeeMachine.Menu.Exists(m => m.ID == orderComponents[DrinkCode])) {
+            if (!MenuContainsDrink(orderComponents[DrinkCode])) {
                 throw new InvalidDrinkException(orderComponents[DrinkCode]);
             }
             
@@ -55,6 +68,24 @@ namespace CoffeeMaker {
             if (orderComponents[Stick] != "0" && orderComponents[Stick] != "") {
                 throw new InvalidStickException(orderComponents[Stick]);
             }
+        }
+        
+        private bool MenuContainsDrink(string drinkCode) {
+            if (Menu.Exists(m => m.ID == drinkCode[0].ToString())) {
+                var myDrink = Menu.Find(m => m.ID == drinkCode[0].ToString());
+                if (drinkCode.Length == 2) {
+                    if (!myDrink.CanBeExtraHot) return false;
+                    if (drinkCode[1] == 'h') {
+                        return true;
+                    }
+                } else if (drinkCode.Length == 1 && drinkCode[0].ToString() == myDrink.ID) {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
+            return false;
         }
     }
 }

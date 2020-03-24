@@ -10,7 +10,6 @@
     <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_CoffeeMakerSolution.-840799513.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
-      <e p=".git/info/exclude" t="IncludeRecursive" />
       <e p="CoffeeMaker" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="CoffeeMachine.cs" t="Include" />
@@ -33,11 +32,12 @@
       <e p="CoffeeMakerSolution.sln" t="IncludeFlat" />
       <e p="CoffeeMakerTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
-        <e p="CafeTests.cs" t="Include" />
+        <e p="CoffeeMachineTests.cs" t="Include" />
         <e p="CoffeeMakerTests.csproj" t="IncludeRecursive" />
         <e p="DrinkMakerTests.cs" t="Include" />
         <e p="FakeDrinkMaker.cs" t="Include" />
         <e p="Menu.csv" t="Include" />
+        <e p="MockMenu.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">

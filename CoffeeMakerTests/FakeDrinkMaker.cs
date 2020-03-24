@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CoffeeMaker;
 
 namespace CoffeeMakerTests {
@@ -25,6 +26,9 @@ namespace CoffeeMakerTests {
                 throw new InvalidOrderException(order);
             }
             return orderComponents;
+        }
+
+        public FakeDrinkMaker(List<MenuItem> Menu) : base(Menu) {
         }
     }
 

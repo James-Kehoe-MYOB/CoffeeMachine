@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
 using CoffeeMaker;
 using Xunit;
 
 namespace CoffeeMakerTests {
     public class DrinkMakerTests {
-        private readonly CoffeeMachine _coffeeMachine = new CoffeeMachine();
-        private readonly DrinkMaker _drinkMaker = new DrinkMaker();
-        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker();
+        static MockMenu testMenu = new MockMenu();
+        private readonly DrinkMaker _drinkMaker = new DrinkMaker(testMenu.Menu);
+        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker(testMenu.Menu);
         
         [Fact (DisplayName = "Validate User Input")]
         public void ValidateUserInput() {
