@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CoffeeMaker;
+using CoffeeMaker.Business_Logic;
 using Xunit;
 
 namespace CoffeeMakerTests {

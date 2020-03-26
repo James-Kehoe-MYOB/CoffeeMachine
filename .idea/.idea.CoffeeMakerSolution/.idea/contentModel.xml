@@ -12,13 +12,22 @@
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="CoffeeMaker" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
-        <e p="CoffeeMachine.cs" t="Include" />
+        <e p="Business_Logic" t="Include">
+          <e p="CoffeeMachine.cs" t="Include" />
+          <e p="DrinkMaker.cs" t="Include" />
+          <e p="OrderValidator.cs" t="Include" />
+        </e>
         <e p="CoffeeMaker.csproj" t="IncludeRecursive" />
+        <e p="Data" t="Include">
+          <e p="Menu.csv" t="Include" />
+          <e p="Reports" t="Include" />
+        </e>
+        <e p="Data_Access" t="Include">
+          <e p="MenuHandler.cs" t="Include" />
+        </e>
         <e p="Drink.cs" t="Include" />
-        <e p="DrinkMaker.cs" t="Include" />
         <e p="DrinkType.cs" t="Include" />
         <e p="Exceptions.cs" t="Include" />
-        <e p="Menu.csv" t="Include" />
         <e p="MenuItem.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -27,16 +36,20 @@
             </e>
           </e>
         </e>
-        <e p="Program.cs" t="Include" />
+        <e p="UI_Layer" t="Include">
+          <e p="Program.cs" t="Include" />
+        </e>
       </e>
       <e p="CoffeeMakerSolution.sln" t="IncludeFlat" />
       <e p="CoffeeMakerTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="CoffeeMachineTests.cs" t="Include" />
         <e p="CoffeeMakerTests.csproj" t="IncludeRecursive" />
+        <e p="Data" t="Include">
+          <e p="Menu.csv" t="Include" />
+        </e>
         <e p="DrinkMakerTests.cs" t="Include" />
         <e p="FakeDrinkMaker.cs" t="Include" />
-        <e p="Menu.csv" t="Include" />
         <e p="MockMenu.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -45,6 +58,7 @@
             </e>
           </e>
         </e>
+        <e p="ReportTests.cs" t="Include" />
       </e>
       <e p="packages" t="ExcludeRecursive" />
     </e>

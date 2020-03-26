@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CoffeeMaker;
+using CoffeeMaker.Business_Logic;
 
 namespace CoffeeMakerTests {
     public class FakeDrinkMaker : DrinkMaker {
