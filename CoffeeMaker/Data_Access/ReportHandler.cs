@@ -15,18 +15,22 @@ namespace CoffeeMaker.Data_Access {
         private static string path = $"../../../Data/Reports/{date}.json";
 
         public void AddOrder(MenuItem order) {
+            GetData();
+            orders.Add(order);
+            UpdateData();
+        }
+
+        private void GetData() {
             try {
                 report = JObject.Load(new JsonTextReader(new StreamReader(path)));
                 if (report["orders"].HasValues) {
                     orders = JsonConvert.DeserializeObject<List<MenuItem>>(report["orders"].ToString());
                 }
-                orders.Add(order);
+            }
+            catch (FileNotFoundException) {
                 UpdateData();
             }
-            catch (FileNotFoundException e) {
-                orders.Add(order);
-                UpdateData();
-            }
+            
         }
         
         private void UpdateData() {
@@ -47,6 +51,28 @@ namespace CoffeeMaker.Data_Access {
 
             report_string = report.ToString();
             File.WriteAllText(path, report_string);
+        }
+
+        public void GenerateReport() {
+            GetData();
+            var teas = from order in orders
+                where order.Drink == DrinkType.Tea
+                select order;
+            
+            var coffees = from order in orders
+                where order.Drink == DrinkType.Coffee
+                select order;
+            
+            var chocolates = from order in orders
+                where order.Drink == DrinkType.Chocolate
+                select order;
+
+            var myreport = "Drink        Orders    Total $\n" +
+                           $"Tea          {teas.Count()}         ${0.4 * teas.Count():0.00}\n" +
+                           $"Coffee       {coffees.Count()}         ${0.6 * coffees.Count():0.00}\n" +
+                           $"Chocolate    {chocolates.Count()}         ${0.5 * chocolates.Count():0.00}";
+
+            Console.WriteLine(myreport);
         }
     }
 }

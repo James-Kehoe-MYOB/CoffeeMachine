@@ -17,9 +17,15 @@ namespace CoffeeMaker.Business_Logic {
         public void TakeOrder() {
             Console.WriteLine("Input an Order: ");
             var order = Console.ReadLine();
-            var orderComponents = SplitOrderComponents(order);
-            var drinkCode = orderComponents[DrinkCode];
+            if (order.ToUpper() == "REPORT") {
+                _reportHandler.GenerateReport();
+                return;
+            }
+            var orderComponents = new string[3];
+            string drinkCode;
             try {
+                orderComponents = SplitOrderComponents(order);
+                drinkCode = orderComponents[DrinkCode];
                 OrderValidator.ParseOrder(Menu, orderComponents);
             }
             catch (Exception e) {
