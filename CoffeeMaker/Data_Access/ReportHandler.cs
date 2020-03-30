@@ -8,17 +8,17 @@ using Newtonsoft.Json.Linq;
 namespace CoffeeMaker.Data_Access {
     public class ReportHandler {
         private List<MenuItem> orders = new List<MenuItem>();
-        private JObject rss;
-        private string rss_string;
+        private JObject report;
+        private string report_string;
         
         private static string date = $"{DateTime.Now.Day}_{DateTime.Now.Month}_{DateTime.Now.Year}";
         private static string path = $"../../../Data/Reports/{date}.json";
 
         public void AddOrder(MenuItem order) {
             try {
-                rss = JObject.Load(new JsonTextReader(new StreamReader(path)));
-                if (rss["orders"].HasValues) {
-                    orders = JsonConvert.DeserializeObject<List<MenuItem>>(rss["orders"].ToString());
+                report = JObject.Load(new JsonTextReader(new StreamReader(path)));
+                if (report["orders"].HasValues) {
+                    orders = JsonConvert.DeserializeObject<List<MenuItem>>(report["orders"].ToString());
                 }
                 orders.Add(order);
                 UpdateData();
@@ -30,7 +30,7 @@ namespace CoffeeMaker.Data_Access {
         }
         
         private void UpdateData() {
-            rss =
+            report =
                 new JObject(
                     new JProperty("date", $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}"),
                     new JProperty("orders",
@@ -45,8 +45,8 @@ namespace CoffeeMaker.Data_Access {
                     )
                 );
 
-            rss_string = rss.ToString();
-            File.WriteAllText(path, rss_string);
+            report_string = report.ToString();
+            File.WriteAllText(path, report_string);
         }
     }
 }
