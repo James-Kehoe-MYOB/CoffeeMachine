@@ -10,7 +10,7 @@ namespace CoffeeMakerTests {
         public void MenuIsNotEmpty() {
            var cm = new CoffeeMachine();
            
-           Assert.NotEmpty(cm.Menu); 
+           Assert.NotEmpty(cm.Menu);
         }
         
     }

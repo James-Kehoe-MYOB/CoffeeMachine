@@ -8,6 +8,7 @@ namespace CoffeeMaker.Business_Logic {
         private const int NumberOfComponents = 3;
         public List<MenuItem> Menu { get; private set; } = MenuHandler.FillMenu();
         private static DrinkMaker _drinkMaker;
+        private ReportHandler _reportHandler = new ReportHandler();
 
         public CoffeeMachine() {
             _drinkMaker = new DrinkMaker(Menu);
@@ -34,6 +35,7 @@ namespace CoffeeMaker.Business_Logic {
                 if (PaymentIsEnough(payment, menuItem.Cost)) {
                     var returnDrink = _drinkMaker.MakeDrink(orderComponents);
                     Console.WriteLine(GenerateOrderMessage(returnDrink));
+                    _reportHandler.AddOrder(menuItem);
                 }
                 else {
                     Console.WriteLine($"Not Enough Money! you need ${menuItem.Cost - payment:0.00} more");
