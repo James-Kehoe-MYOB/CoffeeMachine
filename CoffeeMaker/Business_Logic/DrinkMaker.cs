@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CoffeeMaker.Business_Logic {
@@ -15,14 +16,25 @@ namespace CoffeeMaker.Business_Logic {
             Menu = menu;
         }
 
-        public Drink MakeDrink(string[] orderComponents) {
+        public Drink MakeDrink(string order) {
+            _orderComponents = SplitOrderComponents(order);
             numberOfDrinks = 1;
-            _orderComponents = orderComponents;
             AddSugar();
             AddStick();
             var returnDrink = MixIngredients();
             
             return returnDrink;
+        }
+
+        public bool CheckDrink(string order) {
+            _orderComponents = SplitOrderComponents(order);
+            try {
+                OrderValidator.ParseOrder(Menu, _orderComponents);
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
         }
 
         private void AddSugar() {
@@ -48,9 +60,14 @@ namespace CoffeeMaker.Business_Logic {
             var returnDrink = new Drink(myType, sugar, CheckIfHot());
             return returnDrink;
         }
-        
-        
-        
-        
+
+        public string[] SplitOrderComponents(string order) {
+            var orderComponents = order.Split(':');
+            if (orderComponents.Length != 3) {
+                throw new InvalidOrderException(order);
+            }
+            return orderComponents;
+        }
+
     }
 }

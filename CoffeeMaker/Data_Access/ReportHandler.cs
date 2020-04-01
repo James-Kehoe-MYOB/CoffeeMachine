@@ -15,12 +15,12 @@ namespace CoffeeMaker.Data_Access {
         private static string path = $"../../../Data/Reports/{date}.json";
 
         public void AddOrder(MenuItem order) {
-            GetData();
+            InitData();
             orders.Add(order);
             UpdateData();
         }
 
-        private void GetData() {
+        private void InitData() {
             try {
                 report = JObject.Load(new JsonTextReader(new StreamReader(path)));
                 if (report["orders"].HasValues) {
@@ -40,7 +40,7 @@ namespace CoffeeMaker.Data_Access {
                     new JProperty("orders",
                         new JArray(
                             from o in orders
-                            orderby o.ID
+                            orderby o.Drink
                             select new JObject(
                                 new JProperty("drink", o.Drink),
                                 new JProperty("cost", o.Cost)
@@ -54,25 +54,30 @@ namespace CoffeeMaker.Data_Access {
         }
 
         public void GenerateReport() {
-            GetData();
-            var teas = from order in orders
-                where order.Drink == DrinkType.Tea
-                select order;
+            InitData();
+            var drinksByDrinktype = from order in orders
+                group order by order.Drink;
             
-            var coffees = from order in orders
-                where order.Drink == DrinkType.Coffee
-                select order;
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine("Drink        | Orders | Total $");
+            Console.WriteLine("-------------------------------");
             
-            var chocolates = from order in orders
-                where order.Drink == DrinkType.Chocolate
-                select order;
+            foreach (var drinkType in drinksByDrinktype) {
+                int numberOfDrinks = 0;
+                double totalRevenue = 0;
+                string name = "";
+                foreach (var drink in drinkType) {
+                    numberOfDrinks++;
+                    totalRevenue += drink.Cost;
+                    name = $"{drink.Drink}";
+                    if (drink.Drink == DrinkType.OrangeJuice) { name = "Orange Juice"; }
+                }
 
-            var myreport = "Drink        Orders    Total $\n" +
-                           $"Tea          {teas.Count()}         ${0.4 * teas.Count():0.00}\n" +
-                           $"Coffee       {coffees.Count()}         ${0.6 * coffees.Count():0.00}\n" +
-                           $"Chocolate    {chocolates.Count()}         ${0.5 * chocolates.Count():0.00}";
+                Console.WriteLine($"{name,-12} | {numberOfDrinks,-6} | ${totalRevenue:0.00}");
 
-            Console.WriteLine(myreport);
+            }
+            
+            Console.WriteLine("-------------------------------");
         }
     }
 }

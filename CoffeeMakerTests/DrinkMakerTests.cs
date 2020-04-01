@@ -13,8 +13,8 @@ namespace CoffeeMakerTests {
         [Fact (DisplayName = "Validate User Input")]
         public void ValidateUserInput() {
             var order = "T:1:0";
-            var orderComponents = order.Split(':');
-            Assert.NotNull(_drinkMaker.MakeDrink(orderComponents));
+
+            Assert.NotNull(_drinkMaker.MakeDrink(order));
         }
 
         [Fact]
@@ -27,24 +27,24 @@ namespace CoffeeMakerTests {
         [Fact (DisplayName = "Process User Input")]
         public void ProcessUserInput() {
             var order = "T:1:0";
-            var orderComponents = order.Split(':');
+   
             var expectedDrink = new Drink(DrinkType.Tea, 1, false);
-            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(orderComponents));
+            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order));
         }
         
         [Fact (DisplayName = "Valid Input Returns one drink")]
         public void ValidInputReturnsOneDrink() {
             var order = "C:1:";
-            var orderComponents = order.Split(':');
-            _drinkMaker.MakeDrink(orderComponents);
+
+            _drinkMaker.MakeDrink(order);
             Assert.Equal(1, _drinkMaker.numberOfDrinks);
         }
         
         [Fact (DisplayName = "Valid Input with one or more sugars has stick")]
         public void ValidInputWithSugarHasStick() {
             var order = "H:1:0";
-            var orderComponents = order.Split(':');
-            _drinkMaker.MakeDrink(orderComponents);
+
+            _drinkMaker.MakeDrink(order);
             Assert.True(_drinkMaker.stick);
         }
     }
