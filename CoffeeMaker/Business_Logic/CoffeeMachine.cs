@@ -11,8 +11,8 @@ namespace CoffeeMaker.Business_Logic {
         private readonly ReportHandler _reportHandler = new ReportHandler();
         private readonly IUserInterface _userIO;
 
-        public CoffeeMachine(IUserInterface userIO) {
-            _drinkMaker = new DrinkMaker(Menu);
+        public CoffeeMachine(IUserInterface userIO, DrinkMaker drinkMaker) {
+            _drinkMaker = drinkMaker;
             _userIO = userIO;
         }
 

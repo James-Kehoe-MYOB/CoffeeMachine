@@ -8,7 +8,7 @@ namespace CoffeeMakerTests {
         
         [Fact (DisplayName = "Menu is not empty")]
         public void MenuIsNotEmpty() {
-           var cm = new CoffeeMachine(new ConsoleUI());
+           var cm = new CoffeeMachine(new ConsoleUI(), new DrinkMaker(MockMenu.Menu));
            
            Assert.NotEmpty(cm.Menu);
         }

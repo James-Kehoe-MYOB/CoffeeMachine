@@ -6,9 +6,8 @@ using Xunit;
 
 namespace CoffeeMakerTests {
     public class DrinkMakerTests {
-        static MockMenu testMenu = new MockMenu();
-        private readonly DrinkMaker _drinkMaker = new DrinkMaker(testMenu.Menu);
-        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker(testMenu.Menu);
+        private readonly DrinkMaker _drinkMaker = new DrinkMaker(MockMenu.Menu);
+        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker(MockMenu.Menu);
         
         [Fact (DisplayName = "Validate User Input")]
         public void ValidateUserInput() {
