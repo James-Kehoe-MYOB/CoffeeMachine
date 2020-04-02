@@ -6,14 +6,14 @@ using Xunit;
 
 namespace CoffeeMakerTests {
     public class DrinkMakerTests {
-        private readonly DrinkMaker _drinkMaker = new DrinkMaker(MockMenu.Menu);
-        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker(MockMenu.Menu);
+        private readonly DrinkMaker _drinkMaker = new DrinkMaker();
+        private readonly FakeDrinkMaker _fakeDrinkMaker = new FakeDrinkMaker();
         
         [Fact (DisplayName = "Validate User Input")]
         public void ValidateUserInput() {
             var order = "T:1:0";
 
-            Assert.NotNull(_drinkMaker.MakeDrink(order));
+            Assert.NotNull(_drinkMaker.MakeDrink(order, MockMenu.Menu));
         }
 
         [Fact]
@@ -28,14 +28,14 @@ namespace CoffeeMakerTests {
             var order = "T:1:0";
    
             var expectedDrink = new Drink(DrinkType.Tea, 1, false);
-            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order));
+            Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order, MockMenu.Menu));
         }
         
         [Fact (DisplayName = "Valid Input Returns one drink")]
         public void ValidInputReturnsOneDrink() {
             var order = "C:1:";
 
-            _drinkMaker.MakeDrink(order);
+            _drinkMaker.MakeDrink(order, MockMenu.Menu);
             Assert.Equal(1, _drinkMaker.numberOfDrinks);
         }
         
@@ -43,7 +43,7 @@ namespace CoffeeMakerTests {
         public void ValidInputWithSugarHasStick() {
             var order = "H:1:0";
 
-            _drinkMaker.MakeDrink(order);
+            _drinkMaker.MakeDrink(order, MockMenu.Menu);
             Assert.True(_drinkMaker.stick);
         }
     }

@@ -17,9 +17,10 @@ namespace CoffeeMaker.Business_Logic {
 
         public Response GetChoice();
 
-        public void GiveDrink(Drink myDrink) {
-        }
-        
+        public void GiveDrink(Drink myDrink);
+
+        public string GetPayment();
+
     }
 
     public class ConsoleUI : IUserInterface {
@@ -84,6 +85,9 @@ namespace CoffeeMaker.Business_Logic {
             }
             Console.WriteLine($"{thankYou}{extraHot}{drink}{sugar}{stick}");
         }
-        
+
+        public string GetPayment() {
+            return Console.ReadLine();
+        }
     }
 }

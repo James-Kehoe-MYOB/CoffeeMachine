@@ -59,11 +59,13 @@
         <e p="Data" t="Include">
           <e p="Menu.csv" t="Include" />
           <e p="Reports" t="Include">
+            <e p="2_4_2020.json" t="Include" />
             <e p="dummyreport.json" t="Include" />
           </e>
         </e>
         <e p="DrinkMakerTests.cs" t="Include" />
         <e p="FakeDrinkMaker.cs" t="Include" />
+        <e p="MakeTeaOneSugarUI.cs" t="Include" />
         <e p="MockMenu.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

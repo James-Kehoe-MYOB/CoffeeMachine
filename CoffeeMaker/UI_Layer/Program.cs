@@ -5,8 +5,7 @@ using CoffeeMaker.Data_Access;
 namespace CoffeeMaker.UI_Layer {
     class Program {
         static void Main(string[] args) {
-            var menu = MenuHandler.FillMenu();
-            var coffeeMachine = new CoffeeMachine(new ConsoleUI(), new DrinkMaker(menu));
+            var coffeeMachine = new CoffeeMachine(new ConsoleUI(), new DrinkMaker());
             coffeeMachine.MakeSelection();
         }
     }

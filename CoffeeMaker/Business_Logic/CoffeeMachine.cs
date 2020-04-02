@@ -7,11 +7,12 @@ namespace CoffeeMaker.Business_Logic {
         private const int DrinkCode = 0;
         private const int NumberOfComponents = 3;
         public List<MenuItem> Menu { get; private set; } = MenuHandler.FillMenu();
-        private static DrinkMaker _drinkMaker;
+        public WaterQuantityChecker WaterChecker = new WaterQuantityChecker();
+        public IDrinkMaker _drinkMaker { get; private set; }
         private readonly ReportHandler _reportHandler = new ReportHandler();
         private readonly IUserInterface _userIO;
 
-        public CoffeeMachine(IUserInterface userIO, DrinkMaker drinkMaker) {
+        public CoffeeMachine(IUserInterface userIO, IDrinkMaker drinkMaker) {
             _drinkMaker = drinkMaker;
             _userIO = userIO;
         }
@@ -58,7 +59,7 @@ namespace CoffeeMaker.Business_Logic {
             try {
                 var payment = TakePayment();
                 if (PaymentIsEnough(payment, menuItem.Cost)) {
-                    var returnDrink = _drinkMaker.MakeDrink(order);
+                    var returnDrink = _drinkMaker.MakeDrink(order, Menu);
                     _userIO.GiveDrink(returnDrink);
                     _reportHandler.AddOrder(menuItem);
                 }
@@ -73,8 +74,8 @@ namespace CoffeeMaker.Business_Logic {
         }
         
         private double TakePayment() {
-            Console.Write("How much will you pay? $");
-            var money = Console.ReadLine();
+            _userIO.ShowMessage("How much will you pay? $");
+            var money = _userIO.GetPayment();
             if (double.TryParse(money, out var payment)) {
                 return payment;
             }
@@ -86,13 +87,13 @@ namespace CoffeeMaker.Business_Logic {
         private bool PaymentIsEnough(double payment, double cost) {
             return payment >= cost;
         }
-
         
-
         private MenuItem GetMenuItem(string drinkCode) {
             return Menu.Find(m => m.ID == drinkCode[0].ToString());
         }
 
-        
+        private bool CheckBeverage(MenuItem order, BeverageQuantityChecker checker) {
+            return checker.isEmpty(order, _drinkMaker.WaterLevel);
+        }
     }
 }

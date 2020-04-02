@@ -1,27 +1,32 @@
 using System.Collections.Generic;
 
 namespace CoffeeMaker.Business_Logic {
-    public class DrinkMaker {
+    public interface IDrinkMaker {
+        int WaterLevel { get; set; }
+        Drink MakeDrink(string order, List<MenuItem> menu);
+    }
+
+    public class DrinkMaker : IDrinkMaker {
         private const int DrinkCode = 0;
         private const int Sugars = 1;
         private const int Stick = 2;
         public int numberOfDrinks;
+        private MenuItem _menuItem;
         private int sugar;
         public bool stick;
         private string[] _orderComponents;
-        private List<MenuItem> Menu;
-
-        public DrinkMaker(List<MenuItem> menu) {
-            Menu = menu;
-        }
-
-        public Drink MakeDrink(string order) {
+        public int WaterLevel { get; set; }
+        
+        
+        public Drink MakeDrink(string order, List<MenuItem> menu) {
             _orderComponents = SplitOrderComponents(order);
+            _menuItem = menu.Find(m => m.ID == _orderComponents[DrinkCode][0].ToString());
             numberOfDrinks = 1;
             AddSugar();
             AddStick();
-            var returnDrink = MixIngredients();
-            
+            WaterLevel -= _menuItem.WaterUsage;
+            var returnDrink = MixIngredients(menu);
+
             return returnDrink;
         }
 
@@ -37,15 +42,14 @@ namespace CoffeeMaker.Business_Logic {
             }
         }
 
-        private bool CheckIfHot() {
-            var myItem = Menu.Find(m => m.ID == _orderComponents[DrinkCode][0].ToString());
+        private bool CheckIfHot(List<MenuItem> menu) {
+            var myItem = menu.Find(m => m.ID == _orderComponents[DrinkCode][0].ToString());
             return _orderComponents[0].Length == 2 && myItem.CanBeExtraHot;
         }
 
-        private Drink MixIngredients() {
-            var myItem = Menu.Find(m => m.ID == _orderComponents[DrinkCode][0].ToString());
-            var myType = myItem.Drink;
-            var returnDrink = new Drink(myType, sugar, CheckIfHot());
+        private Drink MixIngredients(List<MenuItem> menu) {
+            var myType = _menuItem.Drink;
+            var returnDrink = new Drink(myType, sugar, CheckIfHot(menu));
             return returnDrink;
         }
 

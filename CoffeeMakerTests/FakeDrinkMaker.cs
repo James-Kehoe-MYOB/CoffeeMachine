@@ -29,7 +29,7 @@ namespace CoffeeMakerTests {
             return orderComponents;
         }
 
-        public FakeDrinkMaker(List<MenuItem> Menu) : base(Menu) {
+        public FakeDrinkMaker() {
         }
     }
 

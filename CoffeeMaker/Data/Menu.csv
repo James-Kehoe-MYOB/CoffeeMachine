@@ -1,5 +1,5 @@
-ID,Drink,Cost,CanBeExtraHot
-T,Tea,0.4,True
-H,Chocolate,0.5,True
-C,Coffee,0.6,True
-O,OrangeJuice,0.6,False
+ID,Drink,Cost,CanBeExtraHot,WaterUsage,MilkUsage
+T,Tea,0.4,True,100,10
+H,Chocolate,0.5,True,100,25
+C,Coffee,0.6,True,100,15
+O,OrangeJuice,0.6,False,0,0
