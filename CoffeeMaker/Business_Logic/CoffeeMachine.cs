@@ -8,13 +8,16 @@ namespace CoffeeMaker.Business_Logic {
         private const int NumberOfComponents = 3;
         public List<MenuItem> Menu { get; private set; } = MenuHandler.FillMenu();
         public WaterQuantityChecker WaterChecker = new WaterQuantityChecker();
+        public MilkQuantityChecker MilkChecker = new MilkQuantityChecker();
         public IDrinkMaker _drinkMaker { get; private set; }
+
         private readonly ReportHandler _reportHandler = new ReportHandler();
         private readonly IUserInterface _userIO;
 
         public CoffeeMachine(IUserInterface userIO, IDrinkMaker drinkMaker) {
             _drinkMaker = drinkMaker;
             _userIO = userIO;
+            //_drinkMaker.WaterLevel = 500;
         }
 
         public void MakeSelection() {
@@ -31,12 +34,11 @@ namespace CoffeeMaker.Business_Logic {
             }
             catch (Exception e) {
                 _userIO.ShowMessage(e.Message);
-                MakeSelection();
+                return;
             }
-            
         }
 
-        private void TakeOrder() {
+        public void TakeOrder() {
             var order = _userIO.GetInput();
             var orderComponents = new string[NumberOfComponents];
             string drinkCode;
@@ -50,7 +52,17 @@ namespace CoffeeMaker.Business_Logic {
                 return;
             }
             var menuItem = GetMenuItem(drinkCode);
-            Transaction(order, menuItem);
+            if (CheckBeverageEmpty(menuItem, WaterChecker, _drinkMaker.WaterLevel)) {
+                throw new InsufficientBeverageException("water");
+            }
+
+            if (CheckBeverageEmpty(menuItem, MilkChecker, _drinkMaker.MilkLevel)) {
+                throw new InsufficientBeverageException("milk");
+            }
+            else {
+                Transaction(order, menuItem);
+            }
+            
         }
 
         private void Transaction(string order, MenuItem menuItem) {
@@ -74,7 +86,6 @@ namespace CoffeeMaker.Business_Logic {
         }
         
         private double TakePayment() {
-            _userIO.ShowMessage("How much will you pay? $");
             var money = _userIO.GetPayment();
             if (double.TryParse(money, out var payment)) {
                 return payment;
@@ -92,8 +103,8 @@ namespace CoffeeMaker.Business_Logic {
             return Menu.Find(m => m.ID == drinkCode[0].ToString());
         }
 
-        private bool CheckBeverage(MenuItem order, BeverageQuantityChecker checker) {
-            return checker.isEmpty(order, _drinkMaker.WaterLevel);
+        private bool CheckBeverageEmpty(MenuItem order, BeverageQuantityChecker checker, int level) {
+            return checker.isEmpty(order, level);
         }
     }
 }

@@ -13,8 +13,6 @@ namespace CoffeeMaker.Business_Logic {
 
         public string GetInput();
 
-        public Response GetOrder(string input);
-
         public Response GetChoice();
 
         public void GiveDrink(Drink myDrink);
@@ -35,17 +33,6 @@ namespace CoffeeMaker.Business_Logic {
         public string GetInput() {
             Console.Write("Please enter an order code: ");
             return Console.ReadLine();
-        }
-
-        public Response GetOrder(string input) {
-            if (input.ToUpper() == "REPORT") {
-                return Response.Report;
-            } if (input.Split(':').Length == 3) {
-                return Response.Order;
-            }
-            else {
-                throw new InvalidOrderException(input);
-            }
         }
 
         public Response GetChoice() {
@@ -87,6 +74,7 @@ namespace CoffeeMaker.Business_Logic {
         }
 
         public string GetPayment() {
+            Console.Write("How much will you pay? $");
             return Console.ReadLine();
         }
     }

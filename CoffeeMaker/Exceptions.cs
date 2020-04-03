@@ -25,4 +25,9 @@ namespace CoffeeMaker {
         public InvalidPaymentException(string payment) : base(string.Format($"Cannot accept '{payment}' as payment")){
         }
     }
+
+    public class InsufficientBeverageException : Exception {
+        public InsufficientBeverageException(string beverage) : base(string.Format($"Insufficient {beverage} for order. Please Refill.")){
+        }
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace CoffeeMaker.Business_Logic {
     public interface IDrinkMaker {
         int WaterLevel { get; set; }
+        int MilkLevel { get; set; }
         Drink MakeDrink(string order, List<MenuItem> menu);
     }
 
@@ -15,7 +16,8 @@ namespace CoffeeMaker.Business_Logic {
         private int sugar;
         public bool stick;
         private string[] _orderComponents;
-        public int WaterLevel { get; set; }
+        public int WaterLevel { get; set; } = 500;
+        public int MilkLevel { get; set; } = 100;
         
         
         public Drink MakeDrink(string order, List<MenuItem> menu) {
@@ -25,6 +27,7 @@ namespace CoffeeMaker.Business_Logic {
             AddSugar();
             AddStick();
             WaterLevel -= _menuItem.WaterUsage;
+            MilkLevel -= _menuItem.MilkUsage;
             var returnDrink = MixIngredients(menu);
 
             return returnDrink;
