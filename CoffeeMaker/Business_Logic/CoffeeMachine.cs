@@ -17,7 +17,6 @@ namespace CoffeeMaker.Business_Logic {
         public CoffeeMachine(IUserInterface userIO, IDrinkMaker drinkMaker) {
             _drinkMaker = drinkMaker;
             _userIO = userIO;
-            //_drinkMaker.WaterLevel = 500;
         }
 
         public void MakeSelection() {

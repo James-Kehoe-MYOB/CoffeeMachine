@@ -30,15 +30,7 @@ namespace CoffeeMakerTests {
             var expectedDrink = new Drink(DrinkType.Tea, 1, false);
             Assert.NotStrictEqual(expectedDrink, _drinkMaker.MakeDrink(order, MockMenu.Menu));
         }
-        
-        [Fact (DisplayName = "Valid Input Returns one drink")]
-        public void ValidInputReturnsOneDrink() {
-            var order = "C:1:";
 
-            _drinkMaker.MakeDrink(order, MockMenu.Menu);
-            Assert.Equal(1, _drinkMaker.numberOfDrinks);
-        }
-        
         [Fact (DisplayName = "Valid Input with one or more sugars has stick")]
         public void ValidInputWithSugarHasStick() {
             var order = "H:1:0";

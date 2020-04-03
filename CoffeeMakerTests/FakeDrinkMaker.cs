@@ -4,10 +4,9 @@ using CoffeeMaker;
 using CoffeeMaker.Business_Logic;
 
 namespace CoffeeMakerTests {
-    public class FakeDrinkMaker : DrinkMaker {
+    public class FakeDrinkMaker : IDrinkMaker {
 
         public Drink Translate(string order) {
-            numberOfDrinks = 1;
             string[] orderComponents;
 
             try {
@@ -30,6 +29,12 @@ namespace CoffeeMakerTests {
         }
 
         public FakeDrinkMaker() {
+        }
+
+        public int WaterLevel { get; set; }
+        public int MilkLevel { get; set; }
+        public Drink MakeDrink(string order, List<MenuItem> menu) {
+            throw new NotImplementedException();
         }
     }
 

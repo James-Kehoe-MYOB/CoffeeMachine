@@ -22,6 +22,7 @@
         </e>
         <e p="CoffeeMaker.csproj" t="IncludeRecursive" />
         <e p="Data" t="Include">
+          <e p="BeverageLevels.csv" t="Include" />
           <e p="Menu.csv" t="Include" />
           <e p="Reports" t="Include">
             <e p="1_4_2020.json" t="Include" />
@@ -32,6 +33,7 @@
           </e>
         </e>
         <e p="Data_Access" t="Include">
+          <e p="BeverageQuantityUpdater.cs" t="Include" />
           <e p="MenuHandler.cs" t="Include" />
           <e p="ReportHandler.cs" t="Include" />
         </e>
@@ -57,6 +59,7 @@
         <e p="CoffeeMachineTests.cs" t="Include" />
         <e p="CoffeeMakerTests.csproj" t="IncludeRecursive" />
         <e p="Data" t="Include">
+          <e p="BeverageLevels.csv" t="Include" />
           <e p="Menu.csv" t="Include" />
           <e p="Reports" t="Include">
             <e p="2_4_2020.json" t="Include" />

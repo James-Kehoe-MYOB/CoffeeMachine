@@ -10,7 +10,7 @@ namespace CoffeeMakerTests {
         [Fact(DisplayName = "IsEmpty Returns True When Water Quantity is Less than Required")]
 
         public void IsEmptyReturnsTrueWhenWaterQuantityIsLessThanRequired() {
-            
+
             var drinkMaker = new DrinkMaker {WaterLevel = 50};
 
             var coffeeMachine = new CoffeeMachine(new ConsoleUI(), drinkMaker);
@@ -63,6 +63,7 @@ namespace CoffeeMakerTests {
             coffeeMachine.MakeSelection();
             
             Assert.Equal(50, coffeeMachine._drinkMaker.WaterLevel);
+            drinkMaker.Refill();
         }
         
         [Fact(DisplayName = "Ordering a drink depletes correct amount of Milk")]
@@ -74,6 +75,7 @@ namespace CoffeeMakerTests {
             coffeeMachine.MakeSelection();
             
             Assert.Equal(140, coffeeMachine._drinkMaker.MilkLevel);
+            drinkMaker.Refill();
         }
 
         [Fact(DisplayName = "Order Cannot be made if Insufficient water")]
