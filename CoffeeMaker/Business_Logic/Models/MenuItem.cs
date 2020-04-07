@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using CsvHelper;
+using CoffeeMaker.Business_Logic.Enums;
 
-namespace CoffeeMaker {
+namespace CoffeeMaker.Business_Logic.Models {
     public class MenuItem {
         public string ID { get; private set; }
         public DrinkType Drink { get; private set; }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 using CoffeeMaker.Data_Access;
 
 namespace CoffeeMaker.Business_Logic {
@@ -28,6 +30,9 @@ namespace CoffeeMaker.Business_Logic {
                         break;
                     case Response.Order:
                         TakeOrder();
+                        break;
+                    case Response.Refill:
+                        _drinkMaker.Refill();
                         break;
                 }
             }

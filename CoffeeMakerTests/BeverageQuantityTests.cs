@@ -1,6 +1,9 @@
 using System.Text.RegularExpressions;
 using CoffeeMaker;
 using CoffeeMaker.Business_Logic;
+using CoffeeMaker.Business_Logic.Enums;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 using Moq;
 using Xunit;
 
@@ -31,7 +34,7 @@ namespace CoffeeMakerTests {
             Assert.True(coffeeMachine.MilkChecker.isEmpty(tea, coffeeMachine._drinkMaker.MilkLevel));
         }
         
-        [Fact(DisplayName = "IsEmpty Returns False When Milk Quantity has Enough for Drink")]
+        [Fact(DisplayName = "IsEmpty Returns False When Water Quantity has Enough for Drink")]
 
         public void IsEmptyReturnsFalseWhenWaterQuantityHasEnoughForDrink() {
             

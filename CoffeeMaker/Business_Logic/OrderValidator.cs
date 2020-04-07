@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 
 namespace CoffeeMaker.Business_Logic {
     public static class OrderValidator {

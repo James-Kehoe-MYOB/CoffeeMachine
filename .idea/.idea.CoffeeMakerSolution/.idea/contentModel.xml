@@ -17,7 +17,18 @@
           <e p="CoffeeMachine.cs" t="Include" />
           <e p="DrinkMaker.cs" t="Include" />
           <e p="EmailNotifier.cs" t="Include" />
+          <e p="Enums" t="Include">
+            <e p="DrinkType.cs" t="Include" />
+          </e>
+          <e p="Exceptions" t="Include">
+            <e p="Exceptions.cs" t="Include" />
+          </e>
+          <e p="IDrinkMaker.cs" t="Include" />
           <e p="IUserInterface.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="Drink.cs" t="Include" />
+            <e p="MenuItem.cs" t="Include" />
+          </e>
           <e p="OrderValidator.cs" t="Include" />
         </e>
         <e p="CoffeeMaker.csproj" t="IncludeRecursive" />
@@ -30,6 +41,7 @@
             <e p="30_3_2020.json" t="Include" />
             <e p="31_3_2020.json" t="Include" />
             <e p="3_4_2020.json" t="Include" />
+            <e p="6_4_2020.json" t="Include" />
           </e>
         </e>
         <e p="Data_Access" t="Include">
@@ -37,10 +49,6 @@
           <e p="MenuHandler.cs" t="Include" />
           <e p="ReportHandler.cs" t="Include" />
         </e>
-        <e p="Drink.cs" t="Include" />
-        <e p="DrinkType.cs" t="Include" />
-        <e p="Exceptions.cs" t="Include" />
-        <e p="MenuItem.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -64,6 +72,7 @@
           <e p="Reports" t="Include">
             <e p="2_4_2020.json" t="Include" />
             <e p="3_4_2020.json" t="Include" />
+            <e p="6_4_2020.json" t="Include" />
             <e p="dummyreport.json" t="Include" />
           </e>
         </e>

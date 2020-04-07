@@ -1,6 +1,6 @@
-using System.Runtime.CompilerServices;
+using CoffeeMaker.Business_Logic.Enums;
 
-namespace CoffeeMaker {
+namespace CoffeeMaker.Business_Logic.Models {
     public class Drink {
         
         public DrinkType type { get; protected set; }

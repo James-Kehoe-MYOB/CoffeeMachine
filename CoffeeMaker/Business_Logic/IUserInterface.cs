@@ -1,10 +1,14 @@
 using System;
+using CoffeeMaker.Business_Logic.Enums;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 
 namespace CoffeeMaker.Business_Logic {
 
     public enum Response {
         Report,
-        Order
+        Order,
+        Refill
     }
     public interface IUserInterface {
         public void NotEnoughMoney(double cost, double payment);
@@ -38,13 +42,15 @@ namespace CoffeeMaker.Business_Logic {
         public Response GetChoice() {
             Console.WriteLine("What would you like to do?\n" +
                               "1. Print Daily Report\n" +
-                              "2. Make Order");
+                              "2. Make Order\n" + 
+                              "3. Refill Water/Milk Levels");
 
             var response = Console.ReadLine();
 
             return response switch {
                 "1" => Response.Report,
                 "2" => Response.Order,
+                "3" => Response.Refill,
                 _ => throw new InvalidOrderException(response)
             };
         }

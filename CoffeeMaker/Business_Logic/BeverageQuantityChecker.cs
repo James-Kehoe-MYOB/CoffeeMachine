@@ -1,3 +1,5 @@
+using CoffeeMaker.Business_Logic.Models;
+
 namespace CoffeeMaker.Business_Logic {
     public interface BeverageQuantityChecker {
         public bool isEmpty(MenuItem drink, int beverageLevel);

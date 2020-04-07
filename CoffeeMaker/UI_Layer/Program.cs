@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CoffeeMaker.Business_Logic;
-using CoffeeMaker.Data_Access;
 
 namespace CoffeeMaker.UI_Layer {
     class Program {

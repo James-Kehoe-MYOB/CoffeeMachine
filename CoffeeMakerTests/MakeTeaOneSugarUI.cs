@@ -1,5 +1,6 @@
 using CoffeeMaker;
 using CoffeeMaker.Business_Logic;
+using CoffeeMaker.Business_Logic.Models;
 
 namespace CoffeeMakerTests {
     public class MakeTeaOneSugarUI : IUserInterface {

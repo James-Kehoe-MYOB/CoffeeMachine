@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CoffeeMaker.Business_Logic.Enums;
+using CoffeeMaker.Business_Logic.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

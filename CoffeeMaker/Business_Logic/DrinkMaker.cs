@@ -1,26 +1,21 @@
 using System.Collections.Generic;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 using CoffeeMaker.Data_Access;
 
 namespace CoffeeMaker.Business_Logic {
-    public interface IDrinkMaker {
-        
-        int WaterLevel { get; set; }
-        int MilkLevel { get; set; }
-        Drink MakeDrink(string order, List<MenuItem> menu);
-    }
-
     public class DrinkMaker : IDrinkMaker {
         private const int DrinkCode = 0;
         private const int Sugars = 1;
         private const int Stick = 2;
         
-        private static BeverageQuantityUpdater updater = new BeverageQuantityUpdater();
+        private static readonly BeverageQuantityUpdater Updater = new BeverageQuantityUpdater();
         private MenuItem _menuItem;
-        private int sugar;
-        public bool stick;
+        private int _sugar;
+        private bool _stick;
         private string[] _orderComponents;
-        public int WaterLevel { get; set; } = updater.ReadLevels()[0].Level;
-        public int MilkLevel { get; set; } = updater.ReadLevels()[1].Level;
+        public int WaterLevel { get; set; } = Updater.ReadLevels()[0].Level;
+        public int MilkLevel { get; set; } = Updater.ReadLevels()[1].Level;
         
         
         public Drink MakeDrink(string order, List<MenuItem> menu) {
@@ -30,21 +25,21 @@ namespace CoffeeMaker.Business_Logic {
             AddStick();
             WaterLevel -= _menuItem.WaterUsage;
             MilkLevel -= _menuItem.MilkUsage;
-            updater.WriteLevels(WaterLevel, MilkLevel);
+            Updater.WriteLevels(WaterLevel, MilkLevel);
             var returnDrink = MixIngredients(menu);
 
             return returnDrink;
         }
 
         private void AddSugar() {
-            sugar = _orderComponents[Sugars] == "" ? 0 : int.Parse(_orderComponents[Sugars]);
+            _sugar = _orderComponents[Sugars] == "" ? 0 : int.Parse(_orderComponents[Sugars]);
         }
 
         private void AddStick() {
-            if ((_orderComponents[Stick] == "0" || _orderComponents[Stick] == "") && sugar != 0) {
-                stick = true;
-            } else if (sugar == 0) {
-                stick = false;
+            if ((_orderComponents[Stick] == "0" || _orderComponents[Stick] == "") && _sugar != 0) {
+                _stick = true;
+            } else if (_sugar == 0) {
+                _stick = false;
             }
         }
 
@@ -55,7 +50,7 @@ namespace CoffeeMaker.Business_Logic {
 
         private Drink MixIngredients(List<MenuItem> menu) {
             var myType = _menuItem.Drink;
-            var returnDrink = new Drink(myType, sugar, CheckIfHot(menu));
+            var returnDrink = new Drink(myType, _sugar, CheckIfHot(menu));
             return returnDrink;
         }
 
@@ -68,7 +63,11 @@ namespace CoffeeMaker.Business_Logic {
         }
 
         public void Refill() {
-            updater.WriteLevels(500, 100);
+            Updater.WriteLevels(500, 100);
+        }
+
+        public bool HasStick() {
+            return _stick;
         }
 
     }

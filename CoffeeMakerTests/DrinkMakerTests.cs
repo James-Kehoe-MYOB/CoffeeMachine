@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using CoffeeMaker;
 using CoffeeMaker.Business_Logic;
+using CoffeeMaker.Business_Logic.Enums;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 using Xunit;
 
 namespace CoffeeMakerTests {
@@ -36,7 +39,7 @@ namespace CoffeeMakerTests {
             var order = "H:1:0";
 
             _drinkMaker.MakeDrink(order, MockMenu.Menu);
-            Assert.True(_drinkMaker.stick);
+            Assert.True(_drinkMaker.HasStick());
         }
     }
 }

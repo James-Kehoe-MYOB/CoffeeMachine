@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using CoffeeMaker;
+using CoffeeMaker.Business_Logic.Enums;
+using CoffeeMaker.Business_Logic.Models;
 
 namespace CoffeeMakerTests {
     public class MockMenu {

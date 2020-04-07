@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using CoffeeMaker;
 using CoffeeMaker.Business_Logic;
+using CoffeeMaker.Business_Logic.Exceptions;
+using CoffeeMaker.Business_Logic.Models;
 
 namespace CoffeeMakerTests {
     public class FakeDrinkMaker : IDrinkMaker {
@@ -34,6 +36,10 @@ namespace CoffeeMakerTests {
         public int WaterLevel { get; set; }
         public int MilkLevel { get; set; }
         public Drink MakeDrink(string order, List<MenuItem> menu) {
+            throw new NotImplementedException();
+        }
+
+        public void Refill() {
             throw new NotImplementedException();
         }
     }

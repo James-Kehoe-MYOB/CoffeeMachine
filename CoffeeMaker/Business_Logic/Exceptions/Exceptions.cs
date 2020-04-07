@@ -1,6 +1,6 @@
 using System;
 
-namespace CoffeeMaker {
+namespace CoffeeMaker.Business_Logic.Exceptions {
     
     public class InvalidOrderException : Exception {
         public InvalidOrderException(string order) : base(string.Format($"'{order}' does not fit an order format")){

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using CoffeeMaker.Business_Logic.Models;
 using CsvHelper;
 
 namespace CoffeeMaker.Data_Access {
